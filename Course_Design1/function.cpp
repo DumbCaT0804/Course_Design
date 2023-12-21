@@ -32,21 +32,280 @@ candidates* browse_candidates_information(int &n) {	//ÓÃ&¿ÉÒÔÖ»ÉùÃ÷¾ÍÒýÈë£¬ÔÚº¯Ê
 	in >> n;
 	candidates *voter = new candidates[n + 1];
 	for (int i = 1; i <= n; i++) {
-		int no;
+		int no, mount;
 		string name, resume;
-		in >> no >> name >> resume;
+		in >> no >> name >> resume >> mount;
 		voter[i].setNo(no);
 		voter[i].setName(name);
 		voter[i].setResume(resume);
+		voter[i].setMount(mount);
 	}
 	in.close();
 
 	return voter;
 }
 
+void change_user_setting(user* head) {
+	cout << "ÊäÈëÄãÏëÒª¸ü¸ÄµÄÓÃ»§±àºÅ" << endl;
+	cout << "> ";
+	int no;
+	cin >> no;
+	getchar();
+	fstream in("Data/user.txt", std::ios::in);
+	stringstream input;
+	int n;
+	in >> n;
+	input << n << endl;
+	for (int i = 1; i <= n; i++) {
+		int number;
+		string account, password;
+		in >> number >> account >> password;
+		if (number == no) {
+			cout << "ÐÞ¸ÄÕËºÅ > ";
+			cin >> account;
+			cout << "ÐÞ¸ÄÃÜÂë > ";
+			cin >> password;
+			cout << "ÊÇ·ñÏëÒªÐÞ¸ÄÓÃ»§È¨ÏÞ£¿(yes/no)" << endl;
+			string x;
+			cin >> x;
+			if (x == "yes") {
+				add_admin(account, password);
+			}
+		}
+		input << number << " " << account << " " << password << endl;
+	}
+	in.close();
+	ofstream fout("Data/user.txt", std::ios::out);
+	fout << input.str();
+	fout.close();
+}
+
+void init_new_user() {
+	ofstream fout("Data/user.txt", std::ios::out);
+	if(!fout.is_open())
+		std::cerr << "ÎÞ·¨´ò¿ªÎÄ¼þ£¡Sorry ~.~" << std::endl;
+	string input;
+	int n = 0;	//Í¶Æ±ÈË¸öÊý
+	getchar();	//ÎüÊÕ»º´æÇø¿Õ¸ñ×Ö·û
+	fout << n << endl;
+	while (1) {
+		getline(std::cin, input);
+		if (input.empty())
+			break;
+		n++;
+		fout << input << std::endl;
+	}
+	fout.seekp(0);
+	fout << n;
+	fout.close();
+}
+
+void add_new_user() {
+	ofstream fout("Data/user.txt", std::ios::app);
+	int no;
+	string account, password;
+	cin >> no >> account >> password;
+	user user(no, account, password);
+	fout << user;
+	fout.close();
+}
+
+void delete_new_user(int number, user* head) {
+
+	ifstream in("Data/user.txt", std::ios::in);
+	int n;
+	in >> n;
+	in.close();
+	ofstream fout("Data/user.txt", std::ios::out);
+	fout << n - 1 << endl;
+	for (int i = 1; i <= n; i++) {
+		if (i == number)
+			continue;
+		fout << head[i].getNo() << " " << head[i].getAccount() << " " << head[i].getPassword() << endl;
+	}
+	fout.close();
+}
+
+user* init_user(int& n) {
+	ifstream in("Data/user.txt", std::ios::in);
+	if (in) {	//´ú±íÎÄ¼þ´æÔÚ
+		in >> n;
+		if (n == 0) {	//´ú±íÎÄ¼þÄÚÈÝÎª¿Õ
+			user* u1 = new user();
+			u1->setNo(0x3f3f3f3f);
+			in.close();
+			return u1;
+		}
+		else {
+			user* u1 = new user[n + 1];
+			for (int i = 1; i <= n; i++) {
+				int no; 
+				string account, password;
+				in >> no >> account >> password;
+				u1[i].setNo(no); u1[i].setAccount(account); u1[i].setPassword(password);
+			}
+			in.close();
+			return u1;
+		}
+	}
+}
+
+void search_user(int number, user* head) {
+
+	ifstream in("Data/user.txt");
+	int n;
+	in >> n;
+	for (int i = 1; i <= n; i++) {
+		if (number == n) {
+			cout << "ÕËºÅ£º" << head[i].getAccount() << " ÃÜÂë£º" << head[i].getPassword();
+			return;
+		}
+	}
+}
+
+void selectSort(int number, user* head) {
+	for (int i = 1; i <= number; i++) {
+		int index = 1;
+		for (int j = 2; j <= number - i + 1; j++) {
+			if (head[j] > head[index])
+				index = j;
+		}
+		user x;
+		x = head[index];
+		head[index] = head[number - i + 1];
+		head[number - i + 1] = x;
+	}
+	ofstream fout("Data/user.txt");
+	fout << number << endl;
+	for (int i = 1; i <= number; i++)
+		fout << head[i].getNo() << " " << head[i].getAccount() << " " << head[i].getPassword() << endl;
+	fout.close();
+}
+
+
+void user_manager_panel() {
+	system("cls");
+	cout << "1) ³õÊ¼»¯ÐÂÓÃ»§" << endl;
+	cout << "2) ¸ü¸ÄÓÃ»§Setting" << endl;
+	cout << "3) Ôö¼ÓÓÃ»§" << endl;
+	cout << "4) É¾³ýÓÃ»§" << endl;
+	cout << "5) ²éÑ¯ÓÃ»§" << endl;
+	cout << "6) ÅÅÐò" << endl;
+	cout << endl;
+	printLine();
+	cout << endl;
+	cout << "> ";
+	int op;
+	cin >> op;
+	user* head;
+	int n;
+	head = init_user(n);
+	if (op == 1) {
+		init_new_user();
+	}
+	else if (op == 2) {
+		change_user_setting(head);
+	}
+	else if (op == 3) {
+		add_new_user();
+	}
+	else if (op == 4) {
+		cout << "ÊäÈëÄãÏëÒªÉ¾³ýµÄ±àºÅ" << endl;
+		cout << "> ";
+		int number;
+		cin >> number;
+		delete_new_user(number, head);
+	}
+	else if (op == 5) {
+		cout << "ÊäÈëÄãÏëÒª²éÕÒµÄÓÃ»§±àºÅ" << endl;
+		cout << "> ";
+		int number;
+		cin >> number;
+		search_user(number, head);
+	}
+	else if (op == 6) {
+		cout << n << endl;	
+		selectSort(n, head);
+	}
+}
+
+void modify_candidates_information() {
+	fstream in("Data/voter1.txt", std::ios::in);
+	cout << "ÊäÈëÄãÏëÐÞ¸ÄµÄºòÑ¡ÈËÐòºÅ: " << endl;
+	cout << "> ";
+	int modify_candidate;
+	cin >> modify_candidate;
+	int n;	//±íÊ¾Ñ¡¾ÙÈË¸öÊý
+	std::stringstream content;
+	in >> n;
+	content << n << endl;
+	for (int i = 1; i <= n; i++) {
+		int no, mount;
+		string name, resume;
+		in >> no >> name >> resume >> mount;
+		if (no == modify_candidate) {
+			cout << "ÄãÒªÐÞ¸ÄµÄÄÚÈÝ: " << endl;
+			cout << "> ";
+			cin >> no >> name >> resume >> mount;
+		}
+		content << no << " " << name << " " << resume << " " << mount << endl;
+	}
+	in.close();
+	ofstream fout("Data/voter1.txt");
+	fout << content.str();
+	fout.close();
+}
+
+void user_vote(int number) {
+	fstream in("Data/voter1.txt", std::ios::in);
+	std::stringstream content;
+	int n;
+	in >> n;
+	content << n << endl;
+	for (int i = 1; i <= n; i++) {
+		int no, mount;
+		string name, resume;
+		in >> no >> name >> resume >> mount;
+		if (i == number) mount++;
+		content << no << " " << name << " " << resume << " " << mount << endl;
+	}
+	in.close();
+	ofstream fout("Data/voter1.txt");
+	fout << content.str();
+	fout.close();
+}
+
+void clear_vote_information() {
+	fstream in("Data/voter1.txt", std::ios::in);
+	int n;	//±íÊ¾Ñ¡¾ÙÈË¸öÊý
+	std::stringstream content;
+	in >> n;
+	content << n << endl;
+	for (int i = 1; i <= n; i++) {
+		int no, mount;
+		string name, resume;
+		in >> no >> name >> resume >> mount;
+		mount = 0;
+		content << no << " " << name << " " << resume << " " << mount << endl;
+	}
+	in.close();
+	ofstream fout("Data/voter1.txt");
+	fout << content.str();
+	fout.close();
+}
+
+void check_voting_status(int n, candidates* voter) {
+	std::cout << std::left << std::setw(8) << "±àºÅ" << std::setw(15) << "ÐÕÃû"
+		<< std::setw(8) << "Ö§³ÖÈËÊý" << std::endl;
+	for (int i = 1; i <= n; i++) {
+		std::cout << std::left << std::setw(8) << voter[i].getNo() << std::setw(15) << voter[i].getName()
+			 << std::setw(8) << voter[i].getMount() << std::endl;
+	}
+}
+
 void display_voter(int n, candidates* voter) {
 	std::cout << std::left << std::setw(8) << "±àºÅ" << std::setw(15) << "ÐÕÃû"
-		<< std::setw(10) << "¼ò½é" << std::setw(8) << "Ö§³ÖÈËÊý" << std::endl;
+		<< std::setw(10) << "¼ò½é" << std::endl;
 	for (int i = 1; i <= n; i++) {
 		std::cout << std::left << std::setw(8) << voter[i].getNo() << std::setw(15) << voter[i].getName()
 			<< std::setw(10) << voter[i].getResume() << std::endl;
@@ -62,28 +321,47 @@ void Begin() {
 	cout << endl;
 	cout << "\t Welcome to the Electronic Voting System 1.0" << endl;
 	cout << endl;
-	cout << "\t\t Author : Zhiwei Yu" << endl;
+	cout << "\t\t Author : Zhiwei Yu, Quyu Hao" << endl;
 	cout << endl;
 	printLine();
 }
 
 //ÕâÑùÖ±½ÓÒýÈë²»ÓÃ¸´ÖÆ£¬²»±»ÐÞ¸Ä£¬½ÚÊ¡Ê±¼ä£¬¿Õ¼ä;
-bool judge_Admin(const string& account, const string& password) {
+
+bool judge_Admin1(const string& account, const string& password) {
+	int no;
 	string verifyAccount, verifyPassword;
-	ifstream in("Data/admin.txt", ios::in);	//¶¨ÒåÊäÈëÁ÷
-	while (in >> verifyAccount >> verifyPassword) {
-		cout << verifyAccount << " " << verifyPassword;
+	ifstream in("Data/user.txt", ios::in);	//¶¨ÒåÊäÈëÁ÷
+	int n;
+	in >> n;
+	while (in >> no >> verifyAccount >> verifyPassword) {
 		if (account == verifyAccount && password == verifyPassword) {
 			in.close();
 			return true;
 		}
-		int x;
-		cin >> x;
 	}
 	in.close();
 	return false;
 }
 
+bool judge_Admin(const string& account, const string& password) {
+	string verifyAccount, verifyPassword;
+	ifstream in("Data/admin.txt", ios::in);	//¶¨ÒåÊäÈëÁ÷
+	while (in >> verifyAccount >> verifyPassword) {
+		if (account == verifyAccount && password == verifyPassword) {
+			in.close();
+			return true;
+		}
+	}
+	in.close();
+	return false;
+}
+
+void add_admin(string account, string password) {
+	ofstream fout("Data/admin.txt", std::ios::app);
+	fout << endl << account << " " << password;
+	fout.close();
+}
 
 void select_Identity() {
 	system("cls");
@@ -104,13 +382,53 @@ void select_Identity() {
 	if (x == '1')
 		admin_System_Login();
 	else if (x == '2')
-		voter_System_Login(); //xx
+		user_System_Login(); //xx
 	else
 		exit_System();	//xx
 }
 
-void voter_System_Login() {
+void user_System_Login() {
+	system("cls");
+	string account, password;
+	cout << "Account :" << endl;
+	cout << "> ";
+	cin >> account;
+	cout << "Password :" << endl;
+	cout << "> ";
+	cin >> password;
+	if (judge_Admin1(account, password))
+		user_System_Panel();
+	else
+		user_System_Login_Error();
+}
 
+void user_System_Panel() {
+	printLine();
+	cout << endl;
+	cout << "1) Í¶Æ±" << endl;
+	cout << "2) ä¯ÀÀºòÑ¡ÈËÐÅÏ¢" << endl;
+	cout << endl;
+	printLine();
+	cout << endl;
+	cout << "> ";
+	int op;
+	cin >> op;
+	if (op == 1) {
+		cout << "ÇëÊäÈëÄãÏëÒªÍ¶Æ±µÄ±àºÅ)> ";
+		int n;
+		cin >> n;
+		user_vote(n);
+	}
+	else if (op == 2) {
+		int n;
+		candidates* voter = browse_candidates_information(n);
+		display_voter(n, voter);
+	}
+		
+}
+
+void user_System_Login_Error() {
+	cout << "±§Ç¸£¬ÕËºÅÃÜÂë´íÎó" << endl;
 }
 
 void exit_System() {
@@ -202,6 +520,20 @@ void admin_System_Panel() {
 		int n;
 		candidates* voter = browse_candidates_information(n);
 		display_voter(n, voter);
+	}
+	else if (op == 3) {
+		modify_candidates_information();
+	}
+	else if (op == 4) {
+		int n;
+		candidates* voter = browse_candidates_information(n);
+		check_voting_status(n, voter);
+	}
+	else if (op == 5) {
+		clear_vote_information();
+	}
+	else if (op == 6) {
+		user_manager_panel();
 	}
 }
 

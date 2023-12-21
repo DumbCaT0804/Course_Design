@@ -1,4 +1,24 @@
 #include "summary.h"
+//ostream: "output stream"
+//ofstream         文件写操作 内存写入存储设备 
+//ifstream         文件读操作，存储设备读区到内存中
+//fstream          读写操作，对打开的文件可进行读写操作 
+
+ostream& operator<< (ostream& out, const user& user) {
+	return out << user.no << " " << user.account << " " << user.password;
+}
+
+bool operator> (const user& user1, const user& user2) {
+	return user1.no > user2.no;
+}
+
+void user::setNo(int _no) { no = _no; };	//带有user前缀既能表明是user的函数，又能引用其内的变量
+void user::setAccount(string _account) { account = _account; };
+void user::setPassword(string _password) { password = _password; };
+
+int user::getNo() { return no; };
+string user::getAccount() { return account; };
+string user::getPassword() { return password; };
 
 ostream& operator<< (ostream& out, const candidates& actor) {
 	out << "---------------------------------------------------------" << endl;
