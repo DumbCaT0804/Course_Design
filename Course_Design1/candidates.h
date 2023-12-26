@@ -6,6 +6,7 @@ private:
 	string account;
 	string password;
 public:
+	user* next;
 	friend ostream& operator<< (ostream&, const user&);
 	friend bool operator > (const user& user1, const user& user2);
 	user() = default;
@@ -37,6 +38,7 @@ private:
 	vector<candidates> _candidates;
 
 public:
+	candidates* next;
 	candidates() = default;
 	candidates(const int& _no, const string& _name, const string& _resume):
 		no(_no), name(_name), resume(_resume) {}

@@ -1,5 +1,3 @@
-4
-1 cxk 12
-2 hal 22
-3 hhh 32
-4 xl 32
+2
+1 cxk hhh
+2 wly xxx

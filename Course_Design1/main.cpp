@@ -1,47 +1,26 @@
 #include "summary.h"
+#pragma warning(disable:4996)
+#define version 2.0
+#define nameNum 10
+
 
 int main() {
-	//
-	//ifstream in("Data/user.txt", std::ios::in);
-	////代表文件存在
-	//	int n = 0;
-	//	in >> n;
 
-	//	user* u1 = new user[n + 1];
-	//	for (int i = 1; i <= n; i++) {
-	//		int no;
-	//		string account, password;
-	//		in >> no >> account >> password;
-	//		u1[i].setNo(no); u1[i].setAccount(account); u1[i].setPassword(password);
-	//	}
-	//	cout << n << endl;
-	//	in.close();
-	//	user* head = u1;
-	//	int number = n;
-	//	for (int i = 1; i <= number; i++) {
-	//		int index = 1;
-	//		for (int j = 2; j <= number - i + 1; j++) {
-	//			if (head[j] > head[index])
-	//				index = j;
-	//		}
-	//		user x;
-	//		x = head[index];
-	//		head[index] = head[number - i + 1];
-	//		head[number - i + 1] = x;
-	//		cout << index <<" " << head[index].getNo() << "置换为: " << number - i + 1 << " "<< head[number - i + 1].getNo() << endl;
-	//	}
-	//	ofstream fout("Data/user.txt");
-	//	fout << number << endl;
-	//	for (int i = 1; i <= number; i++)
-	//		fout << head[i].getNo() << " " << head[i].getAccount() << " " << head[i].getPassword() << endl;
-	//	fout.close();
+	/*int i = MessageBox(NULL, L"您所输入的账号或密码有误，请重新输入！", _T("账号密码错误"), MB_OKCANCEL | MB_ICONHAND);
+	cout << i;
+	InputBox(no, 2, _T("Account"), _T("账号"), NULL, 0, 0, false);
+	user* new_user = new user(std::stoi(wchartostring(user_No, 2)), wchartostring(user_account, 10), wchartostring(user_password, 40));
+
+	*/
 	Begin();
-	getchar();
 	select_Identity();
-
-	//string name = "稿子好";
-	//cout << name;
-	//cout << "Hello, World" << endl;
-
+	IMAGE img;
+	initgraph(1200, 700);
+	HWND hwnd;
+	hwnd = GetHWnd();
+	SetWindowText(hwnd, _T("电子投票系统 2.33"));
+	loadimage(&img, _T("res/退出界面png"), 1200, 700);
+	putimage(0, 0, &img);
+	system("Pause");
 	return 0;
 }
