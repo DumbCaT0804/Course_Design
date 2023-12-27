@@ -6,12 +6,6 @@
 
 int main() {
 
-	/*int i = MessageBox(NULL, L"您所输入的账号或密码有误，请重新输入！", _T("账号密码错误"), MB_OKCANCEL | MB_ICONHAND);
-	cout << i;
-	InputBox(no, 2, _T("Account"), _T("账号"), NULL, 0, 0, false);
-	user* new_user = new user(std::stoi(wchartostring(user_No, 2)), wchartostring(user_account, 10), wchartostring(user_password, 40));
-
-	*/
 	Begin();
 	select_Identity();
 	IMAGE img;
@@ -24,3 +18,16 @@ int main() {
 	system("Pause");
 	return 0;
 }
+
+
+
+
+
+
+
+/*int i = MessageBox(NULL, L"您所输入的账号或密码有误，请重新输入！", _T("账号密码错误"), MB_OKCANCEL | MB_ICONHAND);
+cout << i;
+InputBox(no, 2, _T("Account"), _T("账号"), NULL, 0, 0, false);
+user* new_user = new user(std::stoi(wchartostring(user_No, 2)), wchartostring(user_account, 10), wchartostring(user_password, 40));
+
+*/

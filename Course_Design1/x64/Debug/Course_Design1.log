@@ -2,18 +2,21 @@
   function.cpp
 C:\Users\yzw\source\repos\Course_Design1\function.cpp(80,15): warning C4805: “==”: 在操作中将类型“int”与类型“bool”混合不安全
 C:\Users\yzw\source\repos\Course_Design1\function.cpp(154,15): warning C4805: “==”: 在操作中将类型“int”与类型“bool”混合不安全
-C:\Users\yzw\source\repos\Course_Design1\function.cpp(482,20): warning C4101: “account”: 未引用的局部变量
-C:\Users\yzw\source\repos\Course_Design1\function.cpp(482,33): warning C4101: “password”: 未引用的局部变量
-C:\Users\yzw\source\repos\Course_Design1\function.cpp(560,1): warning C4102: “labelStart”: 未引用的标签
-C:\Users\yzw\source\repos\Course_Design1\function.cpp(841,13): warning C4805: “==”: 在操作中将类型“int”与类型“bool”混合不安全
-C:\Users\yzw\source\repos\Course_Design1\function.cpp(1061,7): warning C4101: “account”: 未引用的局部变量
-C:\Users\yzw\source\repos\Course_Design1\function.cpp(1061,20): warning C4101: “password”: 未引用的局部变量
-C:\Users\yzw\source\repos\Course_Design1\function.cpp(1141,12): warning C4101: “candidates_Resume”: 未引用的局部变量
-C:\Users\yzw\source\repos\Course_Design1\function.cpp(1140,12): warning C4101: “candidates_Name”: 未引用的局部变量
-C:\Users\yzw\source\repos\Course_Design1\function.cpp(1159,12): warning C4101: “candidates_Name”: 未引用的局部变量
-C:\Users\yzw\source\repos\Course_Design1\function.cpp(1193,1): warning C4102: “labelStart”: 未引用的标签
-C:\Users\yzw\source\repos\Course_Design1\function.cpp(1297,50): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
+C:\Users\yzw\source\repos\Course_Design1\function.cpp(491,20): warning C4101: “account”: 未引用的局部变量
+C:\Users\yzw\source\repos\Course_Design1\function.cpp(491,33): warning C4101: “password”: 未引用的局部变量
+C:\Users\yzw\source\repos\Course_Design1\function.cpp(545,11): warning C4101: “user_Account”: 未引用的局部变量
+C:\Users\yzw\source\repos\Course_Design1\function.cpp(546,11): warning C4101: “user_Password”: 未引用的局部变量
+C:\Users\yzw\source\repos\Course_Design1\function.cpp(799,13): warning C4805: “==”: 在操作中将类型“int”与类型“bool”混合不安全
+C:\Users\yzw\source\repos\Course_Design1\function.cpp(947,7): warning C4101: “account”: 未引用的局部变量
+C:\Users\yzw\source\repos\Course_Design1\function.cpp(947,20): warning C4101: “password”: 未引用的局部变量
+C:\Users\yzw\source\repos\Course_Design1\function.cpp(1027,12): warning C4101: “candidates_Resume”: 未引用的局部变量
+C:\Users\yzw\source\repos\Course_Design1\function.cpp(1026,12): warning C4101: “candidates_Name”: 未引用的局部变量
+C:\Users\yzw\source\repos\Course_Design1\function.cpp(1045,12): warning C4101: “candidates_Name”: 未引用的局部变量
+C:\Users\yzw\source\repos\Course_Design1\function.cpp(1117,50): warning C4267: “参数”: 从“size_t”转换到“int”，可能丢失数据
   main.cpp
+  panel.cpp
+C:\Users\yzw\source\repos\Course_Design1\panel.cpp(47,1): warning C4102: “labelStart”: 未引用的标签
+C:\Users\yzw\source\repos\Course_Design1\panel.cpp(114,1): warning C4102: “labelStart”: 未引用的标签
   正在生成代码...
-C:\Users\yzw\source\repos\Course_Design1\function.cpp(409): warning C4715: “init_user”: 不是所有的控件路径都返回值
+C:\Users\yzw\source\repos\Course_Design1\function.cpp(417): warning C4715: “init_user”: 不是所有的控件路径都返回值
   Course_Design1.vcxproj -> C:\Users\yzw\source\repos\Course_Design1\x64\Debug\Course_Design1.exe

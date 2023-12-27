@@ -38,5 +38,8 @@
     <ClCompile Include="candidates.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="panel.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
